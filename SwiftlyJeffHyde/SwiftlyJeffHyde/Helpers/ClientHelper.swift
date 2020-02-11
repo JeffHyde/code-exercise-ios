@@ -23,11 +23,11 @@ struct Client {
         let request = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
-                print("fetchData Session Error: \(error), Is Image: \(isImage)")
+                print("fetchData Session Error: \(error), Url: \(urlString), Is Image: \(isImage)")
                 completion(nil, nil)
             } else {
                 if let response = response as? HTTPURLResponse {
-                    guard response.statusCode == 200 else {
+                    guard 200 ... 299 ~= response.statusCode else {
                         print("fetchData Status Code: \(response.statusCode), Is Image: \(isImage)")
                         completion(nil, nil)
                         return
@@ -37,7 +37,6 @@ struct Client {
                         completion(nil, nil);
                         return
                     }
-                    
                     if !isImage {
                         do {
                             let json = try JSONDecoder().decode(ItemsModel.self, from: data)
@@ -54,7 +53,6 @@ struct Client {
                         }
                         completion(nil, image)
                     }
-                    
                 } else {
                     print("fetchItems Response Not HTTP, Is Image: \(isImage)")
                     completion(nil, nil)

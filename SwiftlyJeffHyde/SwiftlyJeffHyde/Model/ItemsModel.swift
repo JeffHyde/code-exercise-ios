@@ -51,7 +51,7 @@ class SpecialsModel: Decodable, Equatable {
     }
     
     /// The required initializer for coding keys
-    /// - Parameter decoder: The decoder for formatting used to format values
+    /// - Parameter decoder: The decoder used to format values
     required init(from decoder:  Decoder) throws {
         do {
             let container = try decoder.container(keyedBy: CodingKeys.self)

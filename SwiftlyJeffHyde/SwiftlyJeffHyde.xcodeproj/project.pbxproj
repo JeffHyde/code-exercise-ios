@@ -122,14 +122,14 @@
 		BF5EC38C23EE625600D616A0 /* SwiftlyJeffHyde */ = {
 			isa = PBXGroup;
 			children = (
-				BF5EC38D23EE625600D616A0 /* AppDelegate.swift */,
-				BF5EC38F23EE625600D616A0 /* SceneDelegate.swift */,
 				BF6C553723F0AEFD00FEFE1D /* ViewController */,
 				BF5EC3C023EE62AB00D616A0 /* Model */,
 				BF5EC3BD23EE628200D616A0 /* View */,
 				BF5EC3C323EE62CD00D616A0 /* ViewModel */,
 				BF69928C23F108D80012F4F5 /* Helpers */,
 				BFB6A45C23EFC2BF00A657C4 /* Constants */,
+				BF5EC38D23EE625600D616A0 /* AppDelegate.swift */,
+				BF5EC38F23EE625600D616A0 /* SceneDelegate.swift */,
 				BF5EC39623EE625700D616A0 /* Assets.xcassets */,
 				BF5EC3C823EE766000D616A0 /* Colors.xcassets */,
 				BF5EC39B23EE625700D616A0 /* Info.plist */,

@@ -67,15 +67,17 @@ extension ItemsViewController {
     /// This function does some initial setup for the view controller
     func setupView() {
         overrideUserInterfaceStyle = .light
-        collectionView.addSubview(activityIndicator)
+        
         activityIndicator.frame = CGRect(
             x: view.frame.size.width/Constants.activityIndicatorXPositionDivisor,
             y: view.frame.size.height/Constants.activityIndicatorYPositionDivisor,
             width: Constants.activityIndicatorWidth,
             height: Constants.activityIndicatorHeight
         )
-        activityIndicator.color = Constants.priceColor
+        activityIndicator.color = Constants.swiftlyColor
+        collectionView.addSubview(activityIndicator)
         activityIndicator.startAnimating()
+        
         backgroundView.layer.insertSublayer(
             graidentBakgroundColor(for: view, colors: [
                 Constants.lightBackgroundColor,
@@ -83,6 +85,7 @@ extension ItemsViewController {
             ]),
             at:Constants.backgroundViewSublayerIndex
         )
+        
         collectionView.register(
             UINib(nibName: Constants.itemsHeaderNibName, bundle: nil),
             forCellWithReuseIdentifier: Constants.itemsHeaderId
@@ -132,6 +135,7 @@ extension ItemsViewController: UICollectionViewDelegate, UICollectionViewDataSou
             withReuseIdentifier: Constants.itemsHeaderId,
             for: Constants.collectionViewHeaderIndex
             ) as! ItemsCollectionViewHeaderCell
+        
         return cell
     }
 }

@@ -15,6 +15,10 @@ struct Alert {
         alertController = UIAlertController(title: title, message: message, preferredStyle: style)
     }
     
+    /// This function is used to show an alert controller
+    /// - Parameters:
+    ///   - viewController: The view controller to show the alert
+    ///   - completion: A completion to notify that the alert was shown
     func showAlert(_ viewController: UIViewController, completion: @escaping ()->()) {
         let okAction = UIAlertAction(
             title: Constants.dataFailedActionTitle,

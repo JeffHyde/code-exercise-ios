@@ -64,6 +64,7 @@ extension ItemsViewModel {
     func setImage(viewModel: ItemsViewModel, index: Int) -> UIImage {
         let items = viewModel.items?.managerSpecials?[index]
         let imageUrl = items?.imageUrl ?? ""
+        
         return items?.image ?? defaultImage(with: imageUrl)
     }
     
@@ -90,6 +91,7 @@ extension ItemsViewModel {
             value: 2,
             range: NSMakeRange(0, originalPriceAttributeString.length)
         )
+        
         return originalPriceAttributeString
     }
     
@@ -110,6 +112,7 @@ extension ItemsViewModel {
         let canvasUnit = CGFloat(viewModel.items?.canvasUnit ?? 0)
         let itemWidth = CGFloat(viewModel.items?.managerSpecials?[index].width ?? 0)
         let itemHeight = CGFloat(viewModel.items?.managerSpecials?[index].height ?? 0)
+        
         return CGSize(
             width: screenWidth / canvasUnit * itemWidth,
             height: screenWidth / canvasUnit * itemHeight

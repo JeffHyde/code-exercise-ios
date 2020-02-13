@@ -12,3 +12,9 @@ CollectionView Cells are scaled based on the canvas unit, item width & item heig
 Width: (screen width ÷ canvas unit × item width)
 Height: (screen width ÷ canvas unit × item height)
 
+Line greater that 100 characters are moved to the next line
+
+UnitTests are testing a mock json response
+
+## Licence
+MIT

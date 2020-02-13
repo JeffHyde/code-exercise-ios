@@ -26,23 +26,38 @@ class SwiftlyJeffHydeTests: XCTestCase {
   ]
 }
 """
-
 }
 
 extension SwiftlyJeffHydeTests {
-    func testViewModel() {
+    func testDataNotNil() {
+        // Arrange
+        let jsonData = mockJSON.data(using: .utf8)!
+       
+        // Act
+        
+        // Assert
+        XCTAssertNotNil(jsonData)
+    }
+    
+    func testErrorIsNil() {
         // Arrange
         let jsonData = mockJSON.data(using: .utf8)!
         var decodingError: Error?
-        let specials = SpecialsModel(
-            display_name: "Noodle Dish with Roasted Black Bean Sauce",
-            original_price: "2.00",
-            price: "1.00",
-            imageUrl: "https://raw.githubusercontent.com/prestoqinc/code-exercise-ios" +
-            "/master/images/L.png",
-            width: 16,
-            height: 8
-        )
+        
+        // Act
+        do {
+            let _ = try JSONDecoder().decode(ItemsModel.self, from: jsonData)
+        } catch let error {
+            decodingError = error
+        }
+        
+        // Assert
+        XCTAssertNil(decodingError)
+    }
+    
+    func testItemsNotNil() {
+        // Arrange
+        let jsonData = mockJSON.data(using: .utf8)!
         
         // Act
         var items: ItemsModel?
@@ -50,16 +65,155 @@ extension SwiftlyJeffHydeTests {
         do {
             let decodedData = try JSONDecoder().decode(ItemsModel.self, from: jsonData)
             items = decodedData
-        } catch let error {
-            decodingError = error
+        } catch {
+            XCTFail()
         }
         
         // Assert
-        XCTAssertNotNil(jsonData)
         XCTAssertNotNil(items)
-        XCTAssertNil(decodingError)
+    }
+    
+    func testCanvasUnitISEqual() {
+        // Arrange
+        let jsonData = mockJSON.data(using: .utf8)!
+        
+        // Act
+        var items: ItemsModel?
+        
+        do {
+            let decodedData = try JSONDecoder().decode(ItemsModel.self, from: jsonData)
+            items = decodedData
+        } catch  {
+            XCTFail()
+        }
+        
+        // Assert
         XCTAssertEqual(items?.canvasUnit, 16)
+    }
+    
+    func testManagerSpecialsNotNil() {
+        // Arrange
+        let jsonData = mockJSON.data(using: .utf8)!
+        
+        // Act
+        var items: ItemsModel?
+        
+        do {
+            let decodedData = try JSONDecoder().decode(ItemsModel.self, from: jsonData)
+            items = decodedData
+        } catch {
+            XCTFail()
+        }
+        
+        // Assert
         XCTAssertNotNil(items?.managerSpecials?[0])
-        XCTAssertEqual(items?.managerSpecials?[0], specials)
+    }
+    
+    func testDisplayNameIsEqual() {
+        // Arrange
+        let jsonData = mockJSON.data(using: .utf8)!
+        
+        // Act
+        var items: ItemsModel?
+        
+        do {
+            let decodedData = try JSONDecoder().decode(ItemsModel.self, from: jsonData)
+            items = decodedData
+        } catch {
+            XCTFail()
+        }
+        
+        // Assert
+        XCTAssertEqual(items?.managerSpecials?[0].display_name, "Noodle Dish with Roasted Black Bean Sauce")
+    }
+    
+    func testHeightIsEqual() {
+        // Arrange
+        let jsonData = mockJSON.data(using: .utf8)!
+        
+        // Act
+        var items: ItemsModel?
+        
+        do {
+            let decodedData = try JSONDecoder().decode(ItemsModel.self, from: jsonData)
+            items = decodedData
+        } catch {
+            XCTFail()
+        }
+        
+        // Assert
+        XCTAssertEqual(items?.managerSpecials?[0].height, 8)
+    }
+    
+    func testImageUrlIsEqual() {
+        // Arrange
+        let jsonData = mockJSON.data(using: .utf8)!
+        
+        // Act
+        var items: ItemsModel?
+        
+        do {
+            let decodedData = try JSONDecoder().decode(ItemsModel.self, from: jsonData)
+            items = decodedData
+        } catch {
+            XCTFail()
+        }
+        
+        // Assert
+        XCTAssertEqual(items?.managerSpecials?[0].imageUrl, "https://raw.githubusercontent.com/prestoqinc/code-exercise-ios/master/images/L.png")
+    }
+    
+    func testOriginalPriceIsEqual() {
+        // Arrange
+        let jsonData = mockJSON.data(using: .utf8)!
+        
+        // Act
+        var items: ItemsModel?
+        
+        do {
+            let decodedData = try JSONDecoder().decode(ItemsModel.self, from: jsonData)
+            items = decodedData
+        } catch {
+            XCTFail()
+        }
+        
+        // Assert
+        XCTAssertEqual(items?.managerSpecials?[0].original_price, "2.00")
+    }
+    
+    func testPriceIsEqual() {
+        // Arrange
+        let jsonData = mockJSON.data(using: .utf8)!
+        
+        // Act
+        var items: ItemsModel?
+        
+        do {
+            let decodedData = try JSONDecoder().decode(ItemsModel.self, from: jsonData)
+            items = decodedData
+        } catch {
+            XCTFail()
+        }
+        
+        // Assert
+        XCTAssertEqual(items?.managerSpecials?[0].price, "1.00")
+    }
+    
+    func testWidthIsEqual() {
+        // Arrange
+        let jsonData = mockJSON.data(using: .utf8)!
+        
+        // Act
+        var items: ItemsModel?
+        
+        do {
+            let decodedData = try JSONDecoder().decode(ItemsModel.self, from: jsonData)
+            items = decodedData
+        } catch {
+            XCTFail()
+        }
+        
+        // Assert
+        XCTAssertEqual(items?.managerSpecials?[0].width, 16)
     }
 }

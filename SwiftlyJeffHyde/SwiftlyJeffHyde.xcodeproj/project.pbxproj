@@ -46,7 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BF5EC38A23EE625600D616A0 /* SwiftlyJeffHyde.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftlyJeffHyde.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF5EC38A23EE625600D616A0 /* Swiftly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swiftly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF5EC38D23EE625600D616A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF5EC38F23EE625600D616A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BF5EC39123EE625600D616A0 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		BF5EC38B23EE625600D616A0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BF5EC38A23EE625600D616A0 /* SwiftlyJeffHyde.app */,
+				BF5EC38A23EE625600D616A0 /* Swiftly.app */,
 				BF5EC3A023EE625700D616A0 /* SwiftlyJeffHydeTests.xctest */,
 				BF5EC3AB23EE625700D616A0 /* SwiftlyJeffHydeUITests.xctest */,
 			);
@@ -226,7 +226,7 @@
 			);
 			name = SwiftlyJeffHyde;
 			productName = SwiftlyJeffHyde;
-			productReference = BF5EC38A23EE625600D616A0 /* SwiftlyJeffHyde.app */;
+			productReference = BF5EC38A23EE625600D616A0 /* Swiftly.app */;
 			productType = "com.apple.product-type.application";
 		};
 		BF5EC39F23EE625700D616A0 /* SwiftlyJeffHydeTests */ = {
@@ -534,7 +534,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = HydesApps.SwiftlyJeffHyde;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Swiftly;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -552,7 +552,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = HydesApps.SwiftlyJeffHyde;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Swiftly;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

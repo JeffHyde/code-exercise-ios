@@ -6,7 +6,7 @@ iOS 13.2 or later
 OS X v10.15.2 or later
 
 ## Overview
-This app uses a CollectionView to display data retrieved from an endpoint using the MVVM pattern. 
+This app uses Storyboards with a CollectionView to display data retrieved from an endpoint using the MVVM pattern. 
 
 Retrieving data will use a default url and fallback to a backup url in the event of a failure
 

@@ -28,7 +28,7 @@ extension ItemsViewModel {
                 guard let imageUrl = item.imageUrl else { return }
                 
                 self.client.fetchData(source: imageUrl, isImage: true) { (items, image) in
-                    item.image = image ?? UIImage(named: "J")
+                    item.image = image ?? self.defaultImage(with: imageUrl)
                     
                     /// Update each collection view cell after the image was downloaded
                     self.dataBinder.didDownloadImage(atIndex: index)
@@ -40,12 +40,28 @@ extension ItemsViewModel {
         }
     }
     
+    /// This function returns a default UIImage
+    /// - Parameter imageUrl: The url to check for the image string
+    func defaultImage(with imageUrl: String) -> UIImage {
+        if imageUrl.contains("J.png") {
+            return UIImage(named: "J")!
+        } else if imageUrl.contains("K.png") {
+            return UIImage(named: "K")!
+        } else if imageUrl.contains("L.png") {
+            return UIImage(named: "L")!
+        } else {
+            return UIImage(named: "J")!
+        }
+    }
+    
     /// This function gets the image from the view model and returns a UIImage
     /// - Parameters:
     ///   - viewModel: The pased in view model
     ///   - index: The passed in index
     func setImage(viewModel: ItemsViewModel, index: Int) -> UIImage {
-        return viewModel.items?.managerSpecials?[index].image ?? UIImage(named: "J")!
+        let items = viewModel.items?.managerSpecials?[index]
+        let imageUrl = items?.imageUrl ?? ""
+        return items?.image ?? defaultImage(with: imageUrl)
     }
     
     /// This function gets the display name from the view model and returns a String
@@ -63,14 +79,14 @@ extension ItemsViewModel {
     ///   - index: The passed in index
     func setOriginalPrice(viewModel: ItemsViewModel, index: Int) -> NSMutableAttributedString {
         let originalPriceAttributeString: NSMutableAttributedString =  NSMutableAttributedString(
-                   string: "$" + (viewModel.items?.managerSpecials?[index].original_price ?? "")
-               )
-               
-               originalPriceAttributeString.addAttribute(
-                   NSAttributedString.Key.strikethroughStyle,
-                   value: 2,
-                   range: NSMakeRange(0, originalPriceAttributeString.length)
-               )
+            string: "$" + (viewModel.items?.managerSpecials?[index].original_price ?? "")
+        )
+        
+        originalPriceAttributeString.addAttribute(
+            NSAttributedString.Key.strikethroughStyle,
+            value: 2,
+            range: NSMakeRange(0, originalPriceAttributeString.length)
+        )
         return originalPriceAttributeString
     }
     
@@ -100,6 +116,6 @@ extension ItemsViewModel {
     /// This function returns the number of items in the managers specials array
     /// - Parameter viewModel: The passed in view model
     func setNumberOfItems(viewModel: ItemsViewModel) -> Int {
-       return viewModel.items?.managerSpecials?.count ?? 0
+        return viewModel.items?.managerSpecials?.count ?? 0
     }
 }

@@ -12,20 +12,20 @@ import XCTest
 class SwiftlyJeffHydeTests: XCTestCase {
 
     let mockJSON = """
-{
-  "canvasUnit": 16,
-  "managerSpecials": [
-    {
-      "display_name": "Noodle Dish with Roasted Black Bean Sauce",
-      "height": 8,
-      "imageUrl": "https://raw.githubusercontent.com/prestoqinc/code-exercise-ios/master/images/L.png",
-      "original_price": "2.00",
-      "price": "1.00",
-      "width": 16
-    }
-  ]
-}
-"""
+        {
+          "canvasUnit": 16,
+          "managerSpecials": [
+            {
+              "display_name": "Noodle Dish with Roasted Black Bean Sauce",
+              "height": 8,
+              "imageUrl": "https://raw.githubusercontent.com/prestoqinc/code-exercise-ios/master/images/L.png",
+              "original_price": "2.00",
+              "price": "1.00",
+              "width": 16
+            }
+          ]
+        }
+        """
 }
 
 extension SwiftlyJeffHydeTests {

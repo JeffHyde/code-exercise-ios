@@ -49,7 +49,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="clip" minimumScaleFactor="0.14999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="eKi-qp-lmJ">
-                                                            <rect key="frame" x="80.5" y="14" width="215.5" height="25.5"/>
+                                                            <rect key="frame" x="80.5" y="14" width="215.5" height="29.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                             <color key="textColor" name="OriginalPriceColor"/>
@@ -63,7 +63,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="clip" minimumScaleFactor="0.14999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="MXz-um-A9K">
-                                                            <rect key="frame" x="80.5" y="39.5" width="215.5" height="25"/>
+                                                            <rect key="frame" x="80.5" y="43.5" width="215.5" height="29"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                             <color key="textColor" name="PriceColor"/>
@@ -76,7 +76,7 @@
                                                         <constraint firstItem="LJ7-Ga-Yv8" firstAttribute="top" secondItem="CwB-Rz-EWy" secondAttribute="centerY" multiplier="0.195" id="6wE-SP-apH"/>
                                                         <constraint firstItem="LJ7-Ga-Yv8" firstAttribute="leading" secondItem="CwB-Rz-EWy" secondAttribute="centerX" multiplier="0.05" id="7Xx-of-o7e"/>
                                                         <constraint firstItem="MXz-um-A9K" firstAttribute="top" secondItem="eKi-qp-lmJ" secondAttribute="bottom" id="DGg-MR-BYD"/>
-                                                        <constraint firstItem="MXz-um-A9K" firstAttribute="height" secondItem="LJ7-Ga-Yv8" secondAttribute="height" multiplier="1/2.9" id="IlZ-a2-2eN"/>
+                                                        <constraint firstItem="MXz-um-A9K" firstAttribute="height" secondItem="LJ7-Ga-Yv8" secondAttribute="height" multiplier="1/2.5" id="IlZ-a2-2eN"/>
                                                         <constraint firstItem="vhc-kB-Xyb" firstAttribute="width" secondItem="CwB-Rz-EWy" secondAttribute="width" multiplier="2/3" id="RTf-zZ-cmx"/>
                                                         <constraint firstItem="eKi-qp-lmJ" firstAttribute="top" secondItem="LJ7-Ga-Yv8" secondAttribute="top" id="V4L-dl-iIF"/>
                                                         <constraint firstItem="eKi-qp-lmJ" firstAttribute="leading" secondItem="LJ7-Ga-Yv8" secondAttribute="trailing" id="c35-Z3-gEo"/>
@@ -85,7 +85,7 @@
                                                         <constraint firstItem="MXz-um-A9K" firstAttribute="leading" secondItem="LJ7-Ga-Yv8" secondAttribute="trailing" id="m61-PB-8RW"/>
                                                         <constraint firstAttribute="centerX" secondItem="eKi-qp-lmJ" secondAttribute="trailing" multiplier="0.52" id="mbM-gL-Dg9"/>
                                                         <constraint firstItem="LJ7-Ga-Yv8" firstAttribute="width" secondItem="CwB-Rz-EWy" secondAttribute="height" multiplier="1/2" id="pI4-mT-brX"/>
-                                                        <constraint firstItem="eKi-qp-lmJ" firstAttribute="height" secondItem="LJ7-Ga-Yv8" secondAttribute="height" multiplier="1/2.9" id="ue0-0C-09B"/>
+                                                        <constraint firstItem="eKi-qp-lmJ" firstAttribute="height" secondItem="LJ7-Ga-Yv8" secondAttribute="height" multiplier="1/2.5" id="ue0-0C-09B"/>
                                                         <constraint firstItem="vhc-kB-Xyb" firstAttribute="centerX" secondItem="CwB-Rz-EWy" secondAttribute="centerX" id="vti-3I-tzx"/>
                                                         <constraint firstItem="LJ7-Ga-Yv8" firstAttribute="height" secondItem="CwB-Rz-EWy" secondAttribute="height" multiplier="1/2" id="ykg-Dv-tJ1"/>
                                                     </constraints>

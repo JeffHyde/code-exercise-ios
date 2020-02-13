@@ -12,6 +12,9 @@ class ItemsViewModel {
     private let client = Client()
     var items: ItemsModel?
     var dataBinder: DataBinder!
+    let urlContentsJ = "J.png"
+    let urlContentsK = "k.png"
+    let urlContentsL = "L.png"
 }
 
 extension ItemsViewModel {
@@ -43,14 +46,14 @@ extension ItemsViewModel {
     /// This function returns a default UIImage
     /// - Parameter imageUrl: The url to check for the image string
     func defaultImage(with imageUrl: String) -> UIImage {
-        if imageUrl.contains("J.png") {
-            return UIImage(named: "J")!
-        } else if imageUrl.contains("K.png") {
-            return UIImage(named: "K")!
-        } else if imageUrl.contains("L.png") {
-            return UIImage(named: "L")!
+        if imageUrl.contains(urlContentsJ) {
+            return Constants.imageJ!
+        } else if imageUrl.contains(urlContentsK) {
+            return Constants.imageK!
+        } else if imageUrl.contains(urlContentsL) {
+            return Constants.imageL!
         } else {
-            return UIImage(named: "J")!
+            return Constants.imageJ!
         }
     }
     

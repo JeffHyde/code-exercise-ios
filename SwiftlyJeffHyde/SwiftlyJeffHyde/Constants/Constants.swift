@@ -34,6 +34,9 @@ struct Constants {
     static let cellShadowColor = UIColor(
         named: "CellShadowColor"
         )?.cgColor ?? UIColor.black.cgColor
+    static let imageJ = UIImage(named: "J")
+    static let imageK = UIImage(named: "K")
+    static let imageL = UIImage(named: "K")
     static let graidentLocations: [NSNumber] = [0.0, 0.75]
     static let cellBackgroundShadowOpacity: Float = 0.1
     static let cellBackgroundShadowRadius: CGFloat = 2.0

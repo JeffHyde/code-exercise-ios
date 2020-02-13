@@ -15,6 +15,7 @@ class ItemsViewController: UIViewController, DataBinder {
     let viewModel = ItemsViewModel()
     let gradientBackgroundLayer = CAGradientLayer()
     let activityIndicator = UIActivityIndicatorView(style: .large)
+    let sectionZero = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,9 @@ class ItemsViewController: UIViewController, DataBinder {
     /// - Parameter index: The index of the cell to reload
     func didDownloadImage(atIndex index: Int) {
         DispatchQueue.main.async {
-            self.collectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
+            self.collectionView.reloadItems(
+                at: [IndexPath(row: index, section: self.sectionZero)]
+            )
         }
     }
     

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BF5EC38923EE625600D616A0"
-               BuildableName = "Swiftly.app"
+               BuildableName = "SwiftlyJeffHyde.app"
                BlueprintName = "SwiftlyJeffHyde"
                ReferencedContainer = "container:SwiftlyJeffHyde.xcodeproj">
             </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BF5EC38923EE625600D616A0"
-            BuildableName = "Swiftly.app"
+            BuildableName = "SwiftlyJeffHyde.app"
             BlueprintName = "SwiftlyJeffHyde"
             ReferencedContainer = "container:SwiftlyJeffHyde.xcodeproj">
          </BuildableReference>
@@ -82,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BF5EC38923EE625600D616A0"
-            BuildableName = "Swiftly.app"
+            BuildableName = "SwiftlyJeffHyde.app"
             BlueprintName = "SwiftlyJeffHyde"
             ReferencedContainer = "container:SwiftlyJeffHyde.xcodeproj">
          </BuildableReference>

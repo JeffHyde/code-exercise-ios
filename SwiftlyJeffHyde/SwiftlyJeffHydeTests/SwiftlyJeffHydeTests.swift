@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import SwiftlyJeffHyde
+@testable import Swiftly
 
 class SwiftlyJeffHydeTests: XCTestCase {
 

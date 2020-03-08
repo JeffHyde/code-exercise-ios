@@ -9,53 +9,35 @@
 import UIKit
 
 struct Client {
-    /// This function fetches data from the givin endpoint
+    /// This function fetches data from the given url
     /// - Parameters:
-    ///   - urlString: The endpoint url
-    ///   - isImage: A Boolean used to determine is an image is being downloaded
+    ///   - urlString: The url string used to fetch data
     ///   - completion: A closure to notify of completion
-    func fetchData(
-        source urlString: String,
-        isImage: Bool,
-        completion: @escaping (ItemsModel?, UIImage?) -> ()
-    ) {
-        guard let url = URL(string: urlString) else { completion(nil, nil); return }
+    func fetchData(source urlString: String, completion: @escaping (Data?) -> Void) {
+        guard let url = URL(string: urlString) else { return }
         let request = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
-                print("fetchData Session Error: \(error), Url: \(urlString), Is Image: \(isImage)")
-                completion(nil, nil)
+                print("fetchData Session Error: \(error)")
+                completion(nil)
+                return
             } else {
                 if let response = response as? HTTPURLResponse {
                     guard 200 ... 299 ~= response.statusCode else {
-                        print("fetchData Status Code: \(response.statusCode), Is Image: \(isImage)")
-                        completion(nil, nil)
+                        print("fetchData Status Code: \(response.statusCode)")
+                        completion(nil)
                         return
                     }
                     guard let data = data else {
-                        print("fetchData Data is nil, Is Image: \(isImage)")
-                        completion(nil, nil);
+                        print("fetchData Data is nil")
+                        completion(nil)
                         return
                     }
-                    if !isImage {
-                        do {
-                            let json = try JSONDecoder().decode(ItemsModel.self, from: data)
-                            completion(json, nil)
-                        } catch let error {
-                            print("fetchData JSON Decoding Error: ", error)
-                            completion(nil, nil)
-                        }
-                    } else {
-                        guard let image = UIImage(data: data) else {
-                            print("fetchData Image is not data, Is Image: \(isImage)")
-                            completion(nil, nil);
-                            return
-                        }
-                        completion(nil, image)
-                    }
+                    completion(data)
                 } else {
-                    print("fetchItems Response Not HTTP, Is Image: \(isImage)")
-                    completion(nil, nil)
+                    print("fetchItems Response Not HTTP")
+                    completion(nil)
+                    return
                 }
             }
         }

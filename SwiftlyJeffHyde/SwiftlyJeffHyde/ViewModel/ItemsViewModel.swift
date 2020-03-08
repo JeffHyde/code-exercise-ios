@@ -23,15 +23,25 @@ extension ItemsViewModel {
     ///   - urlString: The endpoint url
     ///   - failed: A closure to notify of an endpoint failure
     func fetchData(source urlString: String, failed: @escaping ()->()) {
-        client.fetchData(source: urlString, isImage: false) { (items, image) in
-            guard let items = items else { failed(); return }
-            self.items = items
-            guard let managerSpecials = items.managerSpecials else { failed(); return }
+        client.fetchData(source: urlString) { (data) in
+            guard let data = data else { failed(); return }
+            do {
+                let jsonData = try JSONDecoder().decode(ItemsModel.self, from: data)
+                self.items = jsonData
+            } catch let error {
+                print("fetchData JSON Decoding Error: ", error)
+                failed()
+            }
+            
+            guard let managerSpecials = self.items?.managerSpecials else {
+                failed();
+                return
+            }
             for (index, item) in managerSpecials.enumerated() {
                 guard let imageUrl = item.imageUrl else { return }
-                
-                self.client.fetchData(source: imageUrl, isImage: true) { (items, image) in
-                    item.image = image ?? self.defaultImage(with: imageUrl)
+                self.client.fetchData(source: imageUrl) { (data) in
+                    guard let imageData = data else { failed(); return }
+                    item.image = UIImage(data: imageData) ?? self.defaultImage(with: imageUrl)
                     
                     /// Update each collection view cell after the image was downloaded
                     self.dataBinder.didDownloadImage(atIndex: index)
@@ -41,6 +51,7 @@ extension ItemsViewModel {
             /// Update the collection view after all data has completed downloading
             self.dataBinder.didUpdateData()
         }
+        
     }
     
     /// This function returns a default UIImage

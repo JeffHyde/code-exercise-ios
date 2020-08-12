@@ -13,6 +13,6 @@ class ItemsCollectionViewHeaderCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLabel.text = Constants.managerSpecialsTitle
+        titleLabel.text = Constants.Messages.managerSpecialsTitle.rawValue
     }
 }

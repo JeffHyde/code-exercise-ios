@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 /// The object model for grocery items
 class ItemsModel: Decodable {    
@@ -61,8 +62,8 @@ class SpecialsModel: Decodable, Equatable {
             imageUrl = try container.decode(String.self, forKey: .imageUrl)
             width = try container.decode(Int.self, forKey: .width)
             height = try container.decode(Int.self, forKey: .height)
-        } catch let error {
-            print("Coding Failed: ", error)
+        } catch {
+            os_log("Decoder Failed:", log: .default, type: .error, 0)
         }
     }
     

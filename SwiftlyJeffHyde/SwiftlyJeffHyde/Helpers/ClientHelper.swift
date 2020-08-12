@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 struct Client {
     /// This function fetches data from the given url
@@ -17,25 +18,26 @@ struct Client {
         guard let url = URL(string: urlString) else { return }
         let request = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                print("fetchData Session Error: \(error)")
+            if let _ = error {
+                os_log("fetchData Session Error:", log: .default, type: .error, 0)
                 completion(nil)
                 return
             } else {
                 if let response = response as? HTTPURLResponse {
                     guard 200 ... 299 ~= response.statusCode else {
-                        print("fetchData Status Code: \(response.statusCode)")
+                        os_log("fetchData Status Code:", log: .default, type: .error, 0)
                         completion(nil)
                         return
                     }
                     guard let data = data else {
-                        print("fetchData Data is nil")
+                        os_log("fetchData Date is nil:", log: .default, type: .error, 0)
                         completion(nil)
                         return
                     }
+                    os_log("fetchData OS_LOG", log: .disabled, type: .default, 0)
                     completion(data)
                 } else {
-                    print("fetchItems Response Not HTTP")
+                    os_log("fetchData Response Not HTTP:", log: .default, type: .error, 0)
                     completion(nil)
                     return
                 }

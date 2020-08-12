@@ -21,7 +21,7 @@ struct Alert {
     ///   - completion: A completion to notify that the alert was shown
     func showAlert(_ viewController: UIViewController, completion: @escaping ()->()) {
         let okAction = UIAlertAction(
-            title: Constants.dataFailedActionTitle,
+            title: Constants.Messages.dataFailedActionTitle.rawValue,
             style: .default,
             handler: nil
             )

@@ -21,12 +21,12 @@ class ItemsViewController: UIViewController, DataBinder {
         super.viewDidLoad()
         setupView()
         viewModel.dataBinder = self
-        viewModel.fetchData(source: Constants.dataSourceUrl, failed: {
-            self.viewModel.fetchData(source: Constants.backupDataSourceUrl, failed: {
+        viewModel.fetchData(source: Constants.Urls.dataSourceUrl.rawValue, failed: {
+            self.viewModel.fetchData(source: Constants.Urls.backupDataSourceUrl.rawValue, failed: {
                 DispatchQueue.main.async {
                     let failureAlert = Alert(
-                        title: Constants.dataFailedTitle,
-                        message: Constants.dataFailedMessage,
+                        title: Constants.Messages.dataFailedTitle.rawValue,
+                        message: Constants.Messages.dataFailedMessage.rawValue,
                         style: .alert
                     )
                     failureAlert.showAlert(self, completion: {
@@ -69,26 +69,30 @@ extension ItemsViewController {
         overrideUserInterfaceStyle = .light
         
         activityIndicator.frame = CGRect(
-            x: view.frame.size.width/Constants.activityIndicatorXPositionDivisor,
-            y: view.frame.size.height/Constants.activityIndicatorYPositionDivisor,
-            width: Constants.activityIndicatorWidth,
-            height: Constants.activityIndicatorHeight
+            x: view.frame.size.width/Constants.NumberValues.activityIndicatorXPositionDivisor,
+            y: view.frame.size.height/Constants.NumberValues.activityIndicatorYPositionDivisor,
+            width: Constants.NumberValues.activityIndicatorWidth,
+            height: Constants.NumberValues.activityIndicatorHeight
         )
-        activityIndicator.color = Constants.swiftlyColor
+        activityIndicator.color = UIColor(named: Constants.ColorNames.swiftlyColor.rawValue)
         collectionView.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
         backgroundView.layer.insertSublayer(
             graidentBakgroundColor(for: view, colors: [
-                Constants.lightBackgroundColor,
-                Constants.darkBackgroundColor
+                UIColor(
+                    named: Constants.ColorNames.lightBackgroundColor.rawValue
+                    )?.cgColor ??  UIColor.white.cgColor,
+                UIColor(
+                    named: Constants.ColorNames.darkBackgroundColor.rawValue
+                    )?.cgColor ?? UIColor.gray.cgColor
             ]),
-            at:Constants.backgroundViewSublayerIndex
+            at:Constants.NumberValues.backgroundViewSublayerIndex
         )
         
         collectionView.register(
-            UINib(nibName: Constants.itemsHeaderNibName, bundle: nil),
-            forCellWithReuseIdentifier: Constants.itemsHeaderId
+            UINib(nibName: Constants.Identifiers.itemsHeaderNibName.rawValue, bundle: nil),
+            forCellWithReuseIdentifier: Constants.Identifiers.itemsHeaderCellId.rawValue
         )
     }
     
@@ -97,7 +101,7 @@ extension ItemsViewController {
     /// - Parameter colors: The colors to use for the graident
     func graidentBakgroundColor(for view: UIView, colors: [CGColor]) -> CAGradientLayer {
         gradientBackgroundLayer.colors =  colors
-        gradientBackgroundLayer.locations = Constants.graidentLocations
+        gradientBackgroundLayer.locations = Constants.NumberValues.graidentLocations
         gradientBackgroundLayer.frame = view.bounds
         
         return gradientBackgroundLayer
@@ -110,7 +114,7 @@ extension ItemsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return viewModel.setNumberOfItems(viewModel: viewModel)
+        return viewModel.setNumberOfItems()
     }
     
     func collectionView(
@@ -118,7 +122,7 @@ extension ItemsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Constants.itemsCellId,
+            withReuseIdentifier: Constants.Identifiers.itemsCellId.rawValue,
             for: indexPath
             ) as! ItemsCollectionViewCell
         cell.configure(viewModel: viewModel, indexPath: indexPath)
@@ -132,8 +136,8 @@ extension ItemsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Constants.itemsHeaderId,
-            for: Constants.collectionViewHeaderIndex
+            withReuseIdentifier: Constants.Identifiers.itemsHeaderCellId.rawValue,
+            for: Constants.NumberValues.collectionViewHeaderIndex
             ) as! ItemsCollectionViewHeaderCell
         
         return cell
@@ -147,7 +151,7 @@ extension ItemsViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return Constants.cellLineSpacing
+        return Constants.NumberValues.cellLineSpacing
     }
     
     func collectionView(
@@ -155,7 +159,7 @@ extension ItemsViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return Constants.cellInteritemSpacing
+        return Constants.NumberValues.cellInteritemSpacing
     }
     
     func collectionView(
@@ -164,7 +168,6 @@ extension ItemsViewController: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         return viewModel.setItemSize(
-            viewModel: viewModel,
             screenWidth: collectionView.frame.size.width,
             index: indexPath.row
         )
@@ -177,7 +180,7 @@ extension ItemsViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGSize {
         return CGSize(
             width: collectionView.frame.size.width,
-            height: Constants.collectionViewHeaderHeight
+            height: Constants.NumberValues.collectionViewHeaderHeight
         )
     }
 }

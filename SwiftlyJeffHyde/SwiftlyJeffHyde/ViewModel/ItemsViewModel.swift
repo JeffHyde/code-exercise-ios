@@ -7,14 +7,12 @@
 //
 
 import UIKit
+import os.log
 
 class ItemsViewModel {
     private let client = Client()
     var items: ItemsModel?
-    var dataBinder: DataBinder!
-    let urlContentsJ = "J.png"
-    let urlContentsK = "k.png"
-    let urlContentsL = "L.png"
+    var dataBinder: DataBinder?
 }
 
 extension ItemsViewModel {
@@ -28,8 +26,8 @@ extension ItemsViewModel {
             do {
                 let jsonData = try JSONDecoder().decode(ItemsModel.self, from: data)
                 self.items = jsonData
-            } catch let error {
-                print("fetchData JSON Decoding Error: ", error)
+            } catch {
+                os_log("fetchData JSON Decoding Error:", log: .default, type: .error, 0)
                 failed()
             }
             
@@ -44,12 +42,14 @@ extension ItemsViewModel {
                     item.image = UIImage(data: imageData) ?? self.defaultImage(with: imageUrl)
                     
                     /// Update each collection view cell after the image was downloaded
-                    self.dataBinder.didDownloadImage(atIndex: index)
+                    guard let dataBinder = self.dataBinder else { return }
+                    dataBinder.didDownloadImage(atIndex: index)
                 }
             }
             
             /// Update the collection view after all data has completed downloading
-            self.dataBinder.didUpdateData()
+            guard let dataBinder = self.dataBinder else { return }
+            dataBinder.didUpdateData()
         }
         
     }
@@ -57,14 +57,15 @@ extension ItemsViewModel {
     /// This function returns a default UIImage
     /// - Parameter imageUrl: The url to check for the image string
     func defaultImage(with imageUrl: String) -> UIImage {
-        if imageUrl.contains(urlContentsJ) {
-            return Constants.imageJ!
-        } else if imageUrl.contains(urlContentsK) {
-            return Constants.imageK!
-        } else if imageUrl.contains(urlContentsL) {
-            return Constants.imageL!
-        } else {
-            return Constants.imageJ!
+        switch imageUrl {
+        case let j where j.contains(Constants.UrlImageContent.j.rawValue):
+            return UIImage(named: Constants.ImageNames.imageJ.rawValue) ?? UIImage()
+        case let k where k.contains(Constants.UrlImageContent.j.rawValue):
+            return UIImage(named: Constants.ImageNames.imageK.rawValue) ?? UIImage()
+        case let l where l.contains(Constants.UrlImageContent.l.rawValue):
+            return UIImage(named: Constants.ImageNames.imageL.rawValue) ?? UIImage()
+        default:
+            return UIImage(named: Constants.ImageNames.imageJ.rawValue) ?? UIImage()
         }
     }
     
@@ -72,19 +73,19 @@ extension ItemsViewModel {
     /// - Parameters:
     ///   - viewModel: The pased in view model
     ///   - index: The passed in index
-    func setImage(viewModel: ItemsViewModel, index: Int) -> UIImage {
-        let items = viewModel.items?.managerSpecials?[index]
-        let imageUrl = items?.imageUrl ?? ""
+    func setImage(index: Int) -> UIImage {
+        let specials = items?.managerSpecials?[index]
+        let imageUrl = specials?.imageUrl ?? ""
         
-        return items?.image ?? defaultImage(with: imageUrl)
+        return specials?.image ?? defaultImage(with: imageUrl)
     }
     
     /// This function gets the display name from the view model and returns a String
     /// - Parameters:
     ///   - viewModel: The pased in view model
     ///   - index: The passed in index
-    func setDisplayName(viewModel: ItemsViewModel, index: Int) -> String {
-        return viewModel.items?.managerSpecials?[index].display_name ?? ""
+    func setDisplayName(index: Int) -> String {
+        return items?.managerSpecials?[index].display_name ?? ""
     }
     
     /// This function gets the items original price from the view model and
@@ -92,9 +93,9 @@ extension ItemsViewModel {
     /// - Parameters:
     ///   - viewModel: The pased in view model
     ///   - index: The passed in index
-    func setOriginalPrice(viewModel: ItemsViewModel, index: Int) -> NSMutableAttributedString {
+    func setOriginalPrice(index: Int) -> NSMutableAttributedString {
         let originalPriceAttributeString: NSMutableAttributedString =  NSMutableAttributedString(
-            string: "$" + (viewModel.items?.managerSpecials?[index].original_price ?? "")
+            string: "$" + (items?.managerSpecials?[index].original_price ?? "")
         )
         
         originalPriceAttributeString.addAttribute(
@@ -110,8 +111,8 @@ extension ItemsViewModel {
     /// - Parameters:
     ///   - viewModel: The passed in view model
     ///   - index: The passed in index
-    func setPrice(viewModel: ItemsViewModel, index: Int) -> String {
-        return "$" + (viewModel.items?.managerSpecials?[index].price ?? "")
+    func setPrice(index: Int) -> String {
+        return "$" + (items?.managerSpecials?[index].price ?? "")
     }
     
     /// This function sets the item size based on canvas units
@@ -119,10 +120,10 @@ extension ItemsViewModel {
     ///   - viewModel: The passed in view model
     ///   - screenWidth: The width of the passed in view
     ///   - index: The passed in index
-    func setItemSize(viewModel: ItemsViewModel, screenWidth: CGFloat, index: Int) -> CGSize {
-        let canvasUnit = CGFloat(viewModel.items?.canvasUnit ?? 0)
-        let itemWidth = CGFloat(viewModel.items?.managerSpecials?[index].width ?? 0)
-        let itemHeight = CGFloat(viewModel.items?.managerSpecials?[index].height ?? 0)
+    func setItemSize(screenWidth: CGFloat, index: Int) -> CGSize {
+        let canvasUnit = CGFloat(items?.canvasUnit ?? 0)
+        let itemWidth = CGFloat(items?.managerSpecials?[index].width ?? 0)
+        let itemHeight = CGFloat(items?.managerSpecials?[index].height ?? 0)
         
         return CGSize(
             width: screenWidth / canvasUnit * itemWidth,
@@ -132,7 +133,7 @@ extension ItemsViewModel {
     
     /// This function returns the number of items in the managers specials array
     /// - Parameter viewModel: The passed in view model
-    func setNumberOfItems(viewModel: ItemsViewModel) -> Int {
-        return viewModel.items?.managerSpecials?.count ?? 0
+    func setNumberOfItems() -> Int {
+        return items?.managerSpecials?.count ?? 0
     }
 }
